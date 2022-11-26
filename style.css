@@ -38,6 +38,7 @@ h1 {
     background-color: lightskyblue;
     color: blue;
     font-size: 60px;
+    cursor: pointer;
 }
 
 .strike{
@@ -112,6 +113,7 @@ h2{
     padding: 20px;
     font-size: 30px;
     border-radius: 20px;
+    font-weight: bold;
 }
 
 /* class 'x-hover', when 'hover' will be activated, place some html 'after' hover */
