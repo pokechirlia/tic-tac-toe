@@ -19,7 +19,7 @@ const winning_cases = new Map([      //all winning cases with the corresponding 
 
     [[1,4,7], "strike-column-1"],
     [[2,5,8], "strike-column-2"],
-    [[7,8,9], "strike-column-3"],
+    [[3,6,9], "strike-column-3"],
 
     [[1,5,9], "strike-diagonal-1"],
     [[3,5,7], "strike-diagonal-2"]
@@ -112,7 +112,6 @@ function checkWinner(){
     if(turn == 9)
     {
         winner_name_box.innerHTML = "NO ONE!!!"
-        //console.log("draw");
         gameOver(null);
     }
 
@@ -127,6 +126,8 @@ function gameOver(strikeType){
         strike.classList.add(strikeType);
     }
 
+    options.forEach((option) => (option.disabled = true));
+
     message_box.className = "visible";
 
 
@@ -139,7 +140,10 @@ function newGame(){
     turn = 0;
     player_X_record = [];
     player_O_record = []; 
-    options.forEach((option) => (option.innerHTML = ""));
+    options.forEach((option) => {
+        option.innerHTML = "";
+        option.disabled = false;
+    });
     is_X_turn = true;
     setHover();
 }
