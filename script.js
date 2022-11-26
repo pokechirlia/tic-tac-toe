@@ -9,6 +9,7 @@ const restart_button = document.getElementById("restart-button");
 const PLAYER_X = 'X';
 const PLAYER_O = 'O';
 let is_X_turn = true;
+let turn = 0;
 let player_X_record = [];
 let player_O_record = [];   
 const winning_cases = new Map([      //all winning cases with the corresponding strike type
@@ -54,11 +55,11 @@ function setHover(){
 }
 
 
-
 function makeMove(event){
 
     const option = event.target;
-    
+    turn++;
+
     if(is_X_turn){
         option.innerText = PLAYER_X;
         is_X_turn = false;
@@ -79,8 +80,6 @@ function makeMove(event){
 }
 
 function checkWinner(){
-    //console.log(player_X_record);
-    //console.log(player_O_record);
 
     //X just done their turn
     if(!is_X_turn)
@@ -89,17 +88,20 @@ function checkWinner(){
             const result = winningCase.every(val => player_X_record.includes(val));
             if(result)
             {
+                winner_name_box.innerHTML = "X!"
                 gameOver();
                 return;
             }
         }
     }
 
+    //O just done their turn
     else{
         for(const winningCase of winning_cases.keys()){
             const result = winningCase.every(val => player_O_record.includes(val));
             if(result)
             {
+                winner_name_box.innerHTML = "O!"
                 gameOver();
                 return;
             }
@@ -107,14 +109,28 @@ function checkWinner(){
 
     }
 
+    if(turn == 9)
+    {
+        winner_name_box.innerHTML = "NO ONE!!!"
+        //console.log("draw");
+        gameOver();
+    }
+
 
 }
 
-function newGame(){
-    setHover();
-}
 
 function gameOver(){
     message_box.className = "visible";
+}
+
+
+function newGame(){
+    message_box.className = "hidden";
+    turn = 0;
+    player_X_record = [];
+    player_O_record = []; 
+    options.forEach((option) => (option.innerHTML = ""));
+    setHover();
 }
 

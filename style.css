@@ -114,6 +114,7 @@ h2{
     font-size: 30px;
     border-radius: 20px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 /* class 'x-hover', when 'hover' will be activated, place some html 'after' hover */
