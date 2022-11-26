@@ -88,8 +88,8 @@ function checkWinner(){
             const result = winningCase.every(val => player_X_record.includes(val));
             if(result)
             {
-                winner_name_box.innerHTML = "X!"
-                gameOver();
+                winner_name_box.innerHTML = "PLAYER 1!"
+                gameOver(winning_cases.get(winningCase));
                 return;
             }
         }
@@ -101,8 +101,8 @@ function checkWinner(){
             const result = winningCase.every(val => player_O_record.includes(val));
             if(result)
             {
-                winner_name_box.innerHTML = "O!"
-                gameOver();
+                winner_name_box.innerHTML = "PLAYER 2!"
+                gameOver(winning_cases.get(winningCase));
                 return;
             }
         }
@@ -113,24 +113,34 @@ function checkWinner(){
     {
         winner_name_box.innerHTML = "NO ONE!!!"
         //console.log("draw");
-        gameOver();
+        gameOver(null);
     }
 
 
 }
 
 
-function gameOver(){
+function gameOver(strikeType){
+    
+    if(strikeType != null)
+    {
+        strike.classList.add(strikeType);
+    }
+
     message_box.className = "visible";
+
+
 }
 
 
 function newGame(){
+    strike.className = "strike";
     message_box.className = "hidden";
     turn = 0;
     player_X_record = [];
     player_O_record = []; 
     options.forEach((option) => (option.innerHTML = ""));
+    is_X_turn = true;
     setHover();
 }
 
